@@ -1,11 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 var images map[uint64]*ebiten.Image
@@ -14,12 +16,33 @@ const (
 	SHIP = iota
 )
 
+var (
+	shipX int64
+	shipY int64
+)
+
 // Game implements the ebiten Game interface
 type Game struct{}
 
 // Update proceeds the game state and is called every tick (1/60 s by default)
 func (g *Game) Update() error {
-	// ...
+	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+		shipX--
+		fmt.Println(shipX, shipY)
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+		shipX++
+		fmt.Println(shipX, shipY)
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+		shipY--
+		fmt.Println(shipX, shipY)
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+		shipY++
+		fmt.Println(shipX, shipY)
+	} else if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		fmt.Println("pew")
+	} else if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		return errors.New("quit")
+	}
 	return nil
 }
 
