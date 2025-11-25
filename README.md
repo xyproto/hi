@@ -1,5 +1,5 @@
 # hi
 
-A game written in Go that uses Ebiten.
+The early start of a handcoded game written in Go that uses Ebiten.
 
 * License: BSD-3
